@@ -1,0 +1,20 @@
+.page {
+  width: min(100% - 2 * var(--space), 50rem);
+  margin-inline: auto;
+  padding-block: calc(2 * var(--space));
+}
+
+.intro h1 {
+  margin-top: 0;
+  font-size: clamp(2rem, 6vw, 3rem);
+}
+
+section {
+  margin-block: calc(2 * var(--space));
+}
+
+.credits {
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}

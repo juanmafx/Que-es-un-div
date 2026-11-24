@@ -1,0 +1,39 @@
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space);
+}
+
+.demo-box {
+  display: grid;
+  place-items: center;
+  min-height: 12rem;
+  padding: var(--space);
+  border-radius: var(--radius);
+  color: #ffffff;
+  font-weight: 700;
+  text-align: center;
+}
+
+.demo-box--full {
+  grid-column: 1 / -1;
+  font-size: 1.15rem;
+}
+
+#demo-full {
+  background-color: var(--color-box-full);
+}
+
+#demo-left {
+  background-color: var(--color-box-left);
+}
+
+#demo-right {
+  background-color: var(--color-box-right);
+}
+
+@media (max-width: 40rem) {
+  .demo-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

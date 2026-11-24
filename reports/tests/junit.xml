@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+	<testsuite name="optional results schema" time="0.007808" disabled="0" errors="0" tests="9" failures="0" skipped="0" timestamp="2026-11-24T02:18:09.387Z">
+		<testcase name="creates the expected tables" time="0.001890" classname="optional results schema" file="./tests/db/schema.test.mjs"/>
+		<testcase name="can be applied twice" time="0.000492" classname="optional results schema" file="./tests/db/schema.test.mjs"/>
+		<testcase name="stores a run with its results" time="0.000645" classname="optional results schema" file="./tests/db/schema.test.mjs"/>
+		<testcase name="rejects negative counters" time="0.000683" classname="optional results schema" file="./tests/db/schema.test.mjs"/>
+		<testcase name="rejects a malformed timestamp" time="0.000388" classname="optional results schema" file="./tests/db/schema.test.mjs"/>
+		<testcase name="rejects a short commit hash" time="0.000458" classname="optional results schema" file="./tests/db/schema.test.mjs"/>
+		<testcase name="rejects an unknown status" time="0.000468" classname="optional results schema" file="./tests/db/schema.test.mjs"/>
+		<testcase name="rejects results for a missing run" time="0.000530" classname="optional results schema" file="./tests/db/schema.test.mjs"/>
+		<testcase name="removes results with their run" time="0.000607" classname="optional results schema" file="./tests/db/schema.test.mjs"/>
+	</testsuite>
+	<testsuite name="page structure" time="0.203240" disabled="0" errors="0" tests="8" failures="0" skipped="0" timestamp="2026-11-24T02:18:09.868Z">
+		<testcase name="declares English" time="0.097465" classname="page structure" file="./tests/dom/page.test.mjs"/>
+		<testcase name="has one h1 and one main landmark" time="0.017774" classname="page structure" file="./tests/dom/page.test.mjs"/>
+		<testcase name="has unique ids" time="0.013901" classname="page structure" file="./tests/dom/page.test.mjs"/>
+		<testcase name="nests three demo divs in one parent div" time="0.012797" classname="page structure" file="./tests/dom/page.test.mjs"/>
+		<testcase name="shows each demo box its own real opening tag" time="0.013534" classname="page structure" file="./tests/dom/page.test.mjs"/>
+		<testcase name="labels the inspector input" time="0.023088" classname="page structure" file="./tests/dom/page.test.mjs"/>
+		<testcase name="credits the original source" time="0.011601" classname="page structure" file="./tests/dom/page.test.mjs"/>
+		<testcase name="states the project history" time="0.011614" classname="page structure" file="./tests/dom/page.test.mjs"/>
+	</testsuite>
+	<testsuite name="page security" time="0.087770" disabled="0" errors="0" tests="9" failures="0" skipped="0" timestamp="2026-11-24T02:18:09.987Z">
+		<testcase name="denies by default in the content security policy" time="0.013430" classname="page security" file="./tests/dom/page.test.mjs"/>
+		<testcase name="sets script-src 'self'" time="0.011609" classname="page security" file="./tests/dom/page.test.mjs"/>
+		<testcase name="sets style-src 'self'" time="0.009714" classname="page security" file="./tests/dom/page.test.mjs"/>
+		<testcase name="sets base-uri 'none'" time="0.008336" classname="page security" file="./tests/dom/page.test.mjs"/>
+		<testcase name="sets form-action 'none'" time="0.008215" classname="page security" file="./tests/dom/page.test.mjs"/>
+		<testcase name="does not allow unsafe sources" time="0.008336" classname="page security" file="./tests/dom/page.test.mjs"/>
+		<testcase name="has no inline scripts, styles or event handlers" time="0.011106" classname="page security" file="./tests/dom/page.test.mjs"/>
+		<testcase name="isolates external links" time="0.008004" classname="page security" file="./tests/dom/page.test.mjs"/>
+		<testcase name="references only local assets that exist" time="0.008365" classname="page security" file="./tests/dom/page.test.mjs"/>
+	</testsuite>
+	<testsuite name="tag inspector" time="0.043158" disabled="0" errors="0" tests="5" failures="0" skipped="0" timestamp="2026-11-24T02:18:10.033Z">
+		<testcase name="renders the default tag on mount" time="0.015734" classname="tag inspector" file="./tests/dom/page.test.mjs"/>
+		<testcase name="updates when the input changes" time="0.008593" classname="tag inspector" file="./tests/dom/page.test.mjs"/>
+		<testcase name="renders a readable message for every reported issue" time="0.009072" classname="tag inspector" file="./tests/dom/page.test.mjs"/>
+		<testcase name="renders hostile values as inert text" time="0.009141" classname="tag inspector" file="./tests/dom/page.test.mjs"/>
+		<testcase name="ignores a missing root" time="0.000255" classname="tag inspector" file="./tests/dom/page.test.mjs"/>
+	</testsuite>
+	<testsuite name="parseDivTag: valid tags" time="0.007276" disabled="0" errors="0" tests="9" failures="0" skipped="0" timestamp="2026-11-24T02:18:10.089Z">
+		<testcase name="parses a bare div" time="0.002514" classname="parseDivTag: valid tags" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="reads the id and every class" time="0.000513" classname="parseDivTag: valid tags" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="accepts single-quoted and unquoted values" time="0.000264" classname="parseDivTag: valid tags" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="is case-insensitive for tag and attribute names" time="0.000297" classname="parseDivTag: valid tags" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="tolerates whitespace around equals signs and the tag" time="0.000288" classname="parseDivTag: valid tags" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="accepts an immediate closing tag" time="0.000256" classname="parseDivTag: valid tags" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="removes repeated class names" time="0.000221" classname="parseDivTag: valid tags" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="treats a greater-than sign inside quotes as part of the value" time="0.000251" classname="parseDivTag: valid tags" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="accepts boolean attributes" time="0.000314" classname="parseDivTag: valid tags" file="./tests/unit/div-tag.test.mjs"/>
+	</testsuite>
+	<testsuite name="parseDivTag: rejected input" time="0.005956" disabled="0" errors="0" tests="17" failures="0" skipped="0" timestamp="2026-11-24T02:18:10.091Z">
+		<testcase name="rejects undefined" time="0.004046" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="rejects null" time="0.000086" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="rejects 42" time="0.000084" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="rejects {}" time="0.000079" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="rejects []" time="0.000076" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="rejects &quot;&quot;" time="0.000055" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="rejects &quot;div&quot;" time="0.000056" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="rejects &quot;&lt;span>&quot;" time="0.000043" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="rejects &quot;&lt;divider>&quot;" time="0.000073" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="rejects &quot;&lt;/div>&quot;" time="0.000074" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="rejects input over the length limit" time="0.000094" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="accepts input at exactly the length limit" time="0.000094" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="flags a missing closing bracket" time="0.000120" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="flags an unterminated quote" time="0.000071" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="flags a self-closing div" time="0.000082" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="flags a stray equals sign" time="0.000062" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="flags trailing content" time="0.000061" classname="parseDivTag: rejected input" file="./tests/unit/div-tag.test.mjs"/>
+	</testsuite>
+	<testsuite name="parseDivTag: id and class rules" time="0.000687" disabled="0" errors="0" tests="6" failures="0" skipped="0" timestamp="2026-11-24T02:18:10.097Z">
+		<testcase name="flags a second id and keeps the first" time="0.000146" classname="parseDivTag: id and class rules" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="flags a second class attribute and keeps the first" time="0.000102" classname="parseDivTag: id and class rules" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="flags other repeated attributes" time="0.000064" classname="parseDivTag: id and class rules" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="flags an empty id" time="0.000062" classname="parseDivTag: id and class rules" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="flags an id containing whitespace" time="0.000061" classname="parseDivTag: id and class rules" file="./tests/unit/div-tag.test.mjs"/>
+		<testcase name="is safe with attribute names matching object prototype keys" time="0.000065" classname="parseDivTag: id and class rules" file="./tests/unit/div-tag.test.mjs"/>
+	</testsuite>
+	<testsuite name="parseDivTag: resource bounds" time="0.001367" disabled="0" errors="0" tests="1" failures="0" skipped="0" timestamp="2026-11-24T02:18:10.096Z">
+		<testcase name="handles worst-case input at the limit quickly" time="0.001237" classname="parseDivTag: resource bounds" file="./tests/unit/div-tag.test.mjs"/>
+	</testsuite>
+	<!-- tests 64 -->
+	<!-- suites 8 -->
+	<!-- pass 64 -->
+	<!-- fail 0 -->
+	<!-- cancelled 0 -->
+	<!-- skipped 0 -->
+	<!-- todo 0 -->
+	<!-- duration_ms 763.052246 -->
+</testsuites>

@@ -1,0 +1,37 @@
+# Changelog
+
+All notable changes are documented here. This project follows [Semantic Versioning](https://semver.org/).
+
+## [1.0.0] - Unreleased
+
+First versioned release. The original 2016 page was unversioned.
+
+### Added
+
+- Interactive div tag checker with a tested, linear parser.
+- Unit, DOM and schema test suites with a committed report.
+- GitHub Actions CI with read-only permissions and pinned actions.
+- Optional SQLite schema for test results.
+- Architecture, security and release documentation.
+
+### Changed
+
+- **Breaking:** translated all content and identifiers to English.
+- **Breaking:** renamed the demo ids and moved styles to `assets/styles/`.
+- Rebuilt the layout with CSS Grid and added responsive and dark mode styles.
+- Raised demo box text contrast.
+- Replaced the 1.3 MB bitmap preview with an optimized PNG of the current page.
+
+### Fixed
+
+- Demo labels now match each box's real markup.
+- The lesson text now names the actual box colors.
+- Removed an intro style rule that never applied because its selector targeted the wrong attribute.
+
+### Removed
+
+- End-of-life Bootstrap 3.0.3 stylesheet and the unused template stylesheet.
+
+### Security
+
+- Added a strict content security policy and referrer policy.

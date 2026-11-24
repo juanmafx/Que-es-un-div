@@ -1,0 +1,58 @@
+.inspector {
+  display: grid;
+  gap: 0.5rem;
+  padding: var(--space);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-panel);
+}
+
+.inspector label {
+  font-weight: 700;
+}
+
+.inspector input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 1rem;
+}
+
+.inspector dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.25rem 1rem;
+  margin: 0;
+}
+
+.inspector dt {
+  color: var(--color-muted);
+}
+
+.inspector dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.inspector ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+  color: var(--color-danger);
+}
+
+.inspector-status {
+  margin: 0 0 0.25rem;
+  font-weight: 700;
+}
+
+.inspector-status--valid {
+  color: var(--color-success);
+}
+
+.inspector-status--invalid {
+  color: var(--color-danger);
+}

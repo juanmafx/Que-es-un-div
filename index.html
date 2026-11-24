@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="A short interactive lesson on the HTML div element: containers, nesting, classes and ids.">
+  <title>What Is a div?</title>
+  <link rel="stylesheet" href="assets/styles/base.css">
+  <link rel="stylesheet" href="assets/styles/layout.css">
+  <link rel="stylesheet" href="assets/styles/demo.css">
+  <link rel="stylesheet" href="assets/styles/inspector.css">
+  <script type="module" src="assets/scripts/main.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="intro">
+      <h1>What Is a div?</h1>
+      <p><strong>A div is</strong> a generic block-level container in an HTML document. It carries no meaning of its own, so it is used to group content for styling and layout.</p>
+    </header>
+
+    <main>
+      <section aria-labelledby="rules-heading">
+        <h2 id="rules-heading">The essentials</h2>
+        <ul>
+          <li>A div opens with <code>&lt;div&gt;</code> and closes with <code>&lt;/div&gt;</code>.</li>
+          <li>A div can contain other divs.</li>
+          <li>CSS targets a div through its <code>class</code> or <code>id</code> attribute.</li>
+          <li>A div can have <strong>many classes but only one id</strong>, and that id must be unique in the document.</li>
+          <li>When a semantic element such as <code>&lt;nav&gt;</code> or <code>&lt;article&gt;</code> fits the content, prefer it over a div.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="demo-heading">
+        <h2 id="demo-heading">Three divs in one container</h2>
+        <p>The blue, purple and green boxes below sit inside one parent div. Each box displays its own opening tag. To read the full markup, view the page source with <kbd>Ctrl</kbd> + <kbd>U</kbd> in Chrome.</p>
+        <div class="demo-grid" id="demo-grid">
+          <div class="demo-box demo-box--full" id="demo-full"><code>&lt;div class="demo-box demo-box--full" id="demo-full"&gt;</code></div>
+          <div class="demo-box demo-box--half" id="demo-left"><code>&lt;div class="demo-box demo-box--half" id="demo-left"&gt;</code></div>
+          <div class="demo-box demo-box--half" id="demo-right"><code>&lt;div class="demo-box demo-box--half" id="demo-right"&gt;</code></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="inspector-heading">
+        <h2 id="inspector-heading">Check a div tag</h2>
+        <p>Type an opening tag to see its id and classes. Nothing you type leaves your browser.</p>
+        <div class="inspector" data-tag-inspector>
+          <label for="tag-input">Opening div tag</label>
+          <input id="tag-input" type="text" maxlength="500" spellcheck="false" autocomplete="off" autocapitalize="off" value='&lt;div class="card featured" id="profile"&gt;' data-tag-input>
+          <output for="tag-input" aria-live="polite" data-tag-output>The checker needs JavaScript and a page served over HTTP.</output>
+        </div>
+      </section>
+    </main>
+
+    <footer class="credits">
+      <p>Example adapted from <a href="http://programacionabierta.com" rel="noopener noreferrer">Programacion Abierta</a>. Originally created in 2016, modernized in 2026.</p>
+    </footer>
+  </div>
+</body>
+</html>

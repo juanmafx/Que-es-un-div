@@ -1,0 +1,19 @@
+{
+  "name": "que-es-un-div",
+  "version": "1.0.0",
+  "description": "A short interactive lesson on the HTML div element.",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": "^24.15.0 || >=26.0.0"
+  },
+  "scripts": {
+    "start": "python3 -m http.server 8080 --bind 127.0.0.1",
+    "test": "node --test \"tests/**/*.test.mjs\"",
+    "test:report": "node scripts/run-test-report.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "31.0.1"
+  }
+}
