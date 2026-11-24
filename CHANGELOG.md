@@ -2,7 +2,13 @@
 
 All notable changes are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
-## [1.0.0]
+## [1.0.1] - 2026-11-24
+
+### Changed
+
+- Documentation corrections: the security audit now records that removed legacy files are no longer in the published history. No code behaviour change.
+
+## [1.0.0] - 2026-11-24
 
 First versioned release. The original 2016 page was unversioned.
 

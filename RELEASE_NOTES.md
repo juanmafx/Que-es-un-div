@@ -1,24 +1,15 @@
-# Release Notes: 1.0.0
+# Release Notes: 1.0.1
 
-This is the first versioned release of a small lesson page originally created in 2016. It is now fully in English, has no runtime dependencies, and is covered by automated tests.
+Released 2026-11-24.
 
-## Highlights
+This is a documentation-only patch release. The changelog now dates the published 1.0.0 release, and the security audit records that removed legacy files are no longer in the published history. No code behaviour changed.
 
-- Rewritten lesson with accurate examples.
-- New in-browser checker for opening `div` tags.
-- Bootstrap 3 removed in favor of a small CSS Grid layout.
-- Strict content security policy with no inline code.
-- Responsive layout and dark mode.
+## Upgrade
 
-## Breaking changes
+No action is needed when upgrading from 1.0.0. Replace the deployed files with this version and serve the repository root.
 
-- Demo ids and stylesheet paths changed.
-- The legacy root stylesheets and the bitmap preview no longer exist.
+See the [changelog](CHANGELOG.md) for the full 1.0.0 change list.
 
 ## Verification
 
 The results of the test run are in [reports/tests/summary.md](reports/tests/summary.md). The security review is in [docs/SECURITY_AUDIT.md](docs/SECURITY_AUDIT.md).
-
-## Upgrade
-
-Replace the deployed files with this version and serve the repository root.

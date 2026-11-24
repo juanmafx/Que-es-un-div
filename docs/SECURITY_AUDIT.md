@@ -19,6 +19,7 @@ A static page with one text input, processed only in the browser. There is no ba
 | Low | The checker reported malformed attribute syntax as a valid tag | The parser now applies the HTML tokenizer's attribute rules |
 | Low | The optional schema accepted impossible dates and non-hex commit hashes | Tightened the `CHECK` constraints |
 | Info | Stylesheet referenced missing font files and contained a commented-out third-party URL | Removed with the legacy stylesheets |
+| Info | Removed legacy files remained in Git history | Resolved by the 2026-11-24 history rewrite. No secrets were found in them. Old commits may stay reachable by direct SHA on GitHub until unreferenced objects are purged, so anything that was ever published should still be treated as exposed |
 
 ## Controls in the new code
 
@@ -48,4 +49,3 @@ Secret scanners can miss values that do not match a known format.
 | --- | --- | --- |
 | Low | GitHub Pages cannot send custom headers, so `frame-ancestors` and `nosniff` are not enforced there | Accepted. The page has no sensitive actions |
 | Info | Private vulnerability reporting is not enabled on the repository | Owner decision. `SECURITY.md` describes the fallback |
-| Info | Removed legacy files remain in Git history | Accepted. No secrets were found in them |
