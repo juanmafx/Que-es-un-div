@@ -70,6 +70,20 @@ describe('optional results schema', () => {
     assert.throws(() => insertRun(openDatabase(), { started_at: 'yesterday' }), /CHECK/);
   });
 
+  for (const started_at of ['2026-99-99TgarbageZ', '2026-02-31T12:00:00.000Z', '2026-13-01T12:00:00Z']) {
+    it(`rejects the impossible timestamp ${started_at}`, () => {
+      assert.throws(() => insertRun(openDatabase(), { started_at }), /CHECK/);
+    });
+  }
+
+  it('rejects a commit hash that is not lowercase hex', () => {
+    assert.throws(() => insertRun(openDatabase(), { commit_sha: 'z'.repeat(40) }), /CHECK/);
+  });
+
+  it('accepts a full lowercase commit hash', () => {
+    assert.doesNotThrow(() => insertRun(openDatabase(), { commit_sha: 'a1'.repeat(20) }));
+  });
+
   it('rejects a short commit hash', () => {
     assert.throws(() => insertRun(openDatabase(), { commit_sha: 'abc123' }), /CHECK/);
   });

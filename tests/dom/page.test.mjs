@@ -58,8 +58,18 @@ describe('page structure', () => {
   });
 
   it('credits the original source', () => {
-    const link = loadPage().querySelector('.credits a');
-    assert.equal(link.href, 'http://programacionabierta.com/');
+    const text = loadPage().querySelector('.credits').textContent;
+    assert.match(text, /Example adapted from Programacion Abierta \(programacionabierta\.com\)/);
+  });
+
+  it('does not link to the unresolvable credited domain', () => {
+    assert.equal(loadPage().querySelectorAll('a[href*="programacionabierta"]').length, 0);
+  });
+
+  it('announces results in a status region that permits block content', () => {
+    const output = loadPage().querySelector('[data-tag-output]');
+    assert.equal(output.tagName, 'DIV');
+    assert.equal(output.getAttribute('role'), 'status');
   });
 
   it('states the project history', () => {

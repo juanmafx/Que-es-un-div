@@ -38,6 +38,22 @@ describe('parseDivTag: valid tags', () => {
     assert.equal(parseDivTag('<div id="x"></div>').valid, true);
   });
 
+  for (const value of ['<div></div >', '<div></DIV\n>', '<div> </div>']) {
+    it(`accepts the closing tag in ${JSON.stringify(value)}`, () => {
+      assert.equal(parseDivTag(value).valid, true);
+    });
+  }
+
+  it('keeps a slash in an unquoted value, as HTML does', () => {
+    const result = parseDivTag('<div id=x/>');
+    assert.equal(result.valid, true);
+    assert.equal(result.id, 'x/');
+  });
+
+  it('allows a non-breaking space inside an id', () => {
+    assert.equal(parseDivTag('<div id="a\u00a0b">').valid, true);
+  });
+
   it('removes repeated class names', () => {
     assert.deepEqual(parseDivTag('<div class="a a  b">').classes, ['a', 'b']);
   });
@@ -90,6 +106,36 @@ describe('parseDivTag: rejected input', () => {
   it('flags trailing content', () => {
     assert.ok(parseDivTag('<div>text').issues.includes(ISSUE.TRAILING_CONTENT));
   });
+
+  for (const value of [
+    '<div class="a"id="b">',
+    '<div id="a"b="c">',
+    '<div "x">',
+    '<div <span>',
+    '<div a"b="c">',
+    "<div a'b>",
+    '<div id=a"b>',
+    "<div id=a'b>",
+    '<div id=a=b>',
+    '<div id=a<b>',
+    '<div id=a`b>',
+    '<div / id="x">',
+    '<div / >',
+    '<div class=>',
+    '<div id=>',
+  ]) {
+    it(`flags malformed attribute syntax in ${value}`, () => {
+      const result = parseDivTag(value);
+      assert.equal(result.valid, false);
+      assert.ok(result.issues.includes(ISSUE.MALFORMED_ATTRIBUTE));
+    });
+  }
+
+  for (const value of ['\u00a0<div>', '<div>\u00a0', '<div\u00a0id="x">']) {
+    it(`does not treat a non-breaking space as tag whitespace in ${JSON.stringify(value)}`, () => {
+      assert.equal(parseDivTag(value).valid, false);
+    });
+  }
 });
 
 describe('parseDivTag: id and class rules', () => {

@@ -1,11 +1,11 @@
 # Test Report
 
-- Generated: 2026-11-24T02:18:09.302Z
+- Generated: 2026-11-24T03:26:37.698Z
 - Runtime: Node.js v24.22.0 on linux
 - Command: `npm run test:report`
 - Exit code: 0
-- Total: 64
-- Passed: 64
+- Total: 94
+- Passed: 94
 - Failed: 0
 - Skipped: 0
 
@@ -16,6 +16,11 @@
 | optional results schema | stores a run with its results | passed |
 | optional results schema | rejects negative counters | passed |
 | optional results schema | rejects a malformed timestamp | passed |
+| optional results schema | rejects the impossible timestamp 2026-99-99TgarbageZ | passed |
+| optional results schema | rejects the impossible timestamp 2026-02-31T12:00:00.000Z | passed |
+| optional results schema | rejects the impossible timestamp 2026-13-01T12:00:00Z | passed |
+| optional results schema | rejects a commit hash that is not lowercase hex | passed |
+| optional results schema | accepts a full lowercase commit hash | passed |
 | optional results schema | rejects a short commit hash | passed |
 | optional results schema | rejects an unknown status | passed |
 | optional results schema | rejects results for a missing run | passed |
@@ -27,6 +32,8 @@
 | page structure | shows each demo box its own real opening tag | passed |
 | page structure | labels the inspector input | passed |
 | page structure | credits the original source | passed |
+| page structure | does not link to the unresolvable credited domain | passed |
+| page structure | announces results in a status region that permits block content | passed |
 | page structure | states the project history | passed |
 | page security | denies by default in the content security policy | passed |
 | page security | sets script-src 'self' | passed |
@@ -48,6 +55,11 @@
 | parseDivTag: valid tags | is case-insensitive for tag and attribute names | passed |
 | parseDivTag: valid tags | tolerates whitespace around equals signs and the tag | passed |
 | parseDivTag: valid tags | accepts an immediate closing tag | passed |
+| parseDivTag: valid tags | accepts the closing tag in "<div></div >" | passed |
+| parseDivTag: valid tags | accepts the closing tag in "<div></DIV\n>" | passed |
+| parseDivTag: valid tags | accepts the closing tag in "<div> </div>" | passed |
+| parseDivTag: valid tags | keeps a slash in an unquoted value, as HTML does | passed |
+| parseDivTag: valid tags | allows a non-breaking space inside an id | passed |
 | parseDivTag: valid tags | removes repeated class names | passed |
 | parseDivTag: valid tags | treats a greater-than sign inside quotes as part of the value | passed |
 | parseDivTag: valid tags | accepts boolean attributes | passed |
@@ -68,6 +80,24 @@
 | parseDivTag: rejected input | flags a self-closing div | passed |
 | parseDivTag: rejected input | flags a stray equals sign | passed |
 | parseDivTag: rejected input | flags trailing content | passed |
+| parseDivTag: rejected input | flags malformed attribute syntax in <div class="a"id="b"> | passed |
+| parseDivTag: rejected input | flags malformed attribute syntax in <div id="a"b="c"> | passed |
+| parseDivTag: rejected input | flags malformed attribute syntax in <div "x"> | passed |
+| parseDivTag: rejected input | flags malformed attribute syntax in <div <span> | passed |
+| parseDivTag: rejected input | flags malformed attribute syntax in <div a"b="c"> | passed |
+| parseDivTag: rejected input | flags malformed attribute syntax in <div a'b> | passed |
+| parseDivTag: rejected input | flags malformed attribute syntax in <div id=a"b> | passed |
+| parseDivTag: rejected input | flags malformed attribute syntax in <div id=a'b> | passed |
+| parseDivTag: rejected input | flags malformed attribute syntax in <div id=a=b> | passed |
+| parseDivTag: rejected input | flags malformed attribute syntax in <div id=a<b> | passed |
+| parseDivTag: rejected input | flags malformed attribute syntax in <div id=a`b> | passed |
+| parseDivTag: rejected input | flags malformed attribute syntax in <div / id="x"> | passed |
+| parseDivTag: rejected input | flags malformed attribute syntax in <div / > | passed |
+| parseDivTag: rejected input | flags malformed attribute syntax in <div class=> | passed |
+| parseDivTag: rejected input | flags malformed attribute syntax in <div id=> | passed |
+| parseDivTag: rejected input | does not treat a non-breaking space as tag whitespace in " <div>" | passed |
+| parseDivTag: rejected input | does not treat a non-breaking space as tag whitespace in "<div> " | passed |
+| parseDivTag: rejected input | does not treat a non-breaking space as tag whitespace in "<div id=\"x\">" | passed |
 | parseDivTag: id and class rules | flags a second id and keeps the first | passed |
 | parseDivTag: id and class rules | flags a second class attribute and keeps the first | passed |
 | parseDivTag: id and class rules | flags other repeated attributes | passed |

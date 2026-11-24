@@ -2,9 +2,12 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS test_runs (
   run_id TEXT PRIMARY KEY CHECK (length(run_id) BETWEEN 1 AND 64),
-  commit_sha TEXT CHECK (commit_sha IS NULL OR length(commit_sha) = 40),
+  commit_sha TEXT CHECK (commit_sha IS NULL OR (length(commit_sha) = 40 AND commit_sha NOT GLOB '*[^0-9a-f]*')),
   node_version TEXT NOT NULL CHECK (length(node_version) > 0),
-  started_at TEXT NOT NULL CHECK (started_at GLOB '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]T*Z'),
+  started_at TEXT NOT NULL CHECK (
+    started_at GLOB '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]T*Z'
+    AND strftime('%Y-%m-%d', started_at) IS substr(started_at, 1, 10)
+  ),
   duration_ms REAL NOT NULL CHECK (duration_ms >= 0),
   passed INTEGER NOT NULL CHECK (passed >= 0),
   failed INTEGER NOT NULL CHECK (failed >= 0),

@@ -44,7 +44,8 @@ input event -> parseDivTag(value) -> { valid, id, classes, issues } -> renderIns
 | --- | --- |
 | No framework or build step | The page is small, and shipped source stays readable for learners |
 | Replaced Bootstrap with CSS Grid | The page used only a few grid classes from a 124 KB end-of-life stylesheet |
-| Hand-written linear scanner | Predictable running time on untrusted input, with no backtracking regular expressions |
+| Hand-written linear scanner | Predictable running time on untrusted input. The only regular expression is a single character class used to split class names |
+| Attribute syntax follows the HTML tokenizer | Tags that browsers parse with errors are reported instead of being called valid. The checker is not a full HTML validator |
 | Issue codes separate from messages | Parsing logic can be tested without depending on UI text |
 | `Map` for parsed attributes | Attribute names such as `__proto__` remain plain data |
 | Parser keeps the first duplicate attribute | Matches how HTML parsers treat duplicates |
@@ -55,7 +56,7 @@ Serve the repository root as static files from GitHub Pages or any static host. 
 
 ## Persistence
 
-The application stores nothing. `db/schema.sql` is an optional SQLite schema with two tables, `test_runs` and `test_case_results`, for keeping test history outside the repository.
+The application stores nothing. `db/schema.sql` is an optional SQLite schema with two tables, `test_runs` and `test_case_results`, for keeping test history outside the repository. It needs SQLite 3.37 or newer, and each connection must enable foreign keys.
 
 ## Testing strategy
 

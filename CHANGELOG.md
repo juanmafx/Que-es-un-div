@@ -2,7 +2,7 @@
 
 All notable changes are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
-## [1.0.0] - Unreleased
+## [1.0.0]
 
 First versioned release. The original 2016 page was unversioned.
 
@@ -27,6 +27,9 @@ First versioned release. The original 2016 page was unversioned.
 - Demo labels now match each box's real markup.
 - The lesson text now names the actual box colors.
 - Removed an intro style rule that never applied because its selector targeted the wrong attribute.
+- The checker now flags malformed attribute syntax and accepts whitespace inside a closing tag.
+- The checker result region now uses markup that permits its block content.
+- The optional schema now rejects impossible dates and commit hashes that are not lowercase hex.
 
 ### Removed
 
@@ -35,3 +38,4 @@ First versioned release. The original 2016 page was unversioned.
 ### Security
 
 - Added a strict content security policy and referrer policy.
+- Replaced the link to the credited domain, which no longer resolves, with a plain-text credit.

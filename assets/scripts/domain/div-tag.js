@@ -25,6 +25,25 @@ const isWhitespace = (character) =>
 const isNameBoundary = (character) =>
   isWhitespace(character) || character === '=' || character === '>' || character === '/';
 
+const INVALID_NAME_CHARACTERS = new Set(['"', "'", '<']);
+const INVALID_UNQUOTED_VALUE_CHARACTERS = new Set(['"', "'", '=', '<', '`']);
+
+const containsAny = (value, characters) => [...value].some((character) => characters.has(character));
+
+const trimAsciiWhitespace = (value) => {
+  let start = 0;
+  let end = value.length;
+  while (start < end && isWhitespace(value[start])) start += 1;
+  while (end > start && isWhitespace(value[end - 1])) end -= 1;
+  return value.slice(start, end);
+};
+
+const isClosingDivTag = (value) =>
+  value.slice(0, 5).toLowerCase() === '</div' && trimAsciiWhitespace(value.slice(5)) === '>';
+
+const isAttributeSeparator = (character) =>
+  character === undefined || isWhitespace(character) || character === '/' || character === '>';
+
 const skipWhitespace = (source, start) => {
   let index = start;
   while (index < source.length && isWhitespace(source[index])) index += 1;
@@ -41,12 +60,12 @@ const readValue = (source, start) => {
   const quote = source[start];
   if (quote === '"' || quote === "'") {
     const end = source.indexOf(quote, start + 1);
-    if (end === -1) return { terminated: false, value: '', next: source.length };
-    return { terminated: true, value: source.slice(start + 1, end), next: end + 1 };
+    if (end === -1) return { terminated: false, quoted: true, value: '', next: source.length };
+    return { terminated: true, quoted: true, value: source.slice(start + 1, end), next: end + 1 };
   }
   let index = start;
   while (index < source.length && !isWhitespace(source[index]) && source[index] !== '>') index += 1;
-  return { terminated: true, value: source.slice(start, index), next: index };
+  return { terminated: true, quoted: false, value: source.slice(start, index), next: index };
 };
 
 const scanAttributes = (source) => {
@@ -67,6 +86,7 @@ const scanAttributes = (source) => {
         issues.add(ISSUE.SELF_CLOSING);
         return { attributes, issues, end: index + 2 };
       }
+      issues.add(ISSUE.MALFORMED_ATTRIBUTE);
       index += 1;
       continue;
     }
@@ -79,11 +99,13 @@ const scanAttributes = (source) => {
     const nameStart = index;
     while (index < source.length && !isNameBoundary(source[index])) index += 1;
     const name = source.slice(nameStart, index).toLowerCase();
+    if (containsAny(name, INVALID_NAME_CHARACTERS)) issues.add(ISSUE.MALFORMED_ATTRIBUTE);
 
     let value = '';
     const afterName = skipWhitespace(source, index);
     if (source[afterName] === '=') {
       const valueStart = skipWhitespace(source, afterName + 1);
+      if (source[valueStart] === '>') issues.add(ISSUE.MALFORMED_ATTRIBUTE);
       const parsed = readValue(source, valueStart);
       if (!parsed.terminated) {
         issues.add(ISSUE.UNTERMINATED);
@@ -91,6 +113,10 @@ const scanAttributes = (source) => {
       }
       value = parsed.value;
       index = parsed.next;
+      const malformedValue = parsed.quoted
+        ? !isAttributeSeparator(source[index])
+        : containsAny(value, INVALID_UNQUOTED_VALUE_CHARACTERS);
+      if (malformedValue) issues.add(ISSUE.MALFORMED_ATTRIBUTE);
     }
 
     if (attributes.has(name)) {
@@ -116,12 +142,12 @@ export function parseDivTag(input) {
   if (typeof input !== 'string') return buildResult(null, [], [ISSUE.NOT_A_DIV]);
   if (input.length > MAX_TAG_LENGTH) return buildResult(null, [], [ISSUE.TOO_LONG]);
 
-  const source = input.trim();
+  const source = trimAsciiWhitespace(input);
   if (!startsWithDivTag(source)) return buildResult(null, [], [ISSUE.NOT_A_DIV]);
 
   const { attributes, issues, end } = scanAttributes(source);
-  const trailing = source.slice(end).trim();
-  if (trailing !== '' && trailing.toLowerCase() !== '</div>') issues.add(ISSUE.TRAILING_CONTENT);
+  const trailing = trimAsciiWhitespace(source.slice(end));
+  if (trailing !== '' && !isClosingDivTag(trailing)) issues.add(ISSUE.TRAILING_CONTENT);
 
   const id = attributes.has('id') ? attributes.get('id') : null;
   if (id === '') issues.add(ISSUE.EMPTY_ID);
