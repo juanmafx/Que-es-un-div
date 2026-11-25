@@ -1,8 +1,8 @@
-# Que-es-un-div
+# what-is-a-div
 
 **What Is a div?** A short interactive lesson on the HTML `<div>` element, with no runtime dependencies.
 
-[![Preview of the lesson page](docs/images/preview.png)](https://juanmafx.github.io/Que-es-un-div/)
+[![Preview of the lesson page](docs/images/preview.png)](https://juanmafx.github.io/what-is-a-div/)
 
 > **Project history:** originally created in 2016, modernized in 2026. The repository name is kept from the original Spanish title.
 
@@ -48,7 +48,7 @@ Requirements: a modern browser and Python 3 to serve the files. Node.js `^24.15.
 
 ```bash
 git clone https://github.com/juanmafx/Que-es-un-div.git
-cd Que-es-un-div
+cd what-is-a-div
 npm start
 ```
 
