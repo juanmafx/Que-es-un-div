@@ -47,7 +47,7 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the design rationale.
 Requirements: a modern browser and Python 3 to serve the files. Node.js `^24.15.0 || >=26.0.0` is needed only for the tests.
 
 ```bash
-git clone https://github.com/juanmafx/Que-es-un-div.git
+git clone https://github.com/juanmafx/what-is-a-div.git
 cd what-is-a-div
 npm start
 ```
